@@ -1,6 +1,12 @@
-nosey
+Nosey
 =====
-> An smtp server for webdeveloping purposes
+
+> An smtp server for web development purposes
+
+Nosey is a smtp catch-all server and a web interface.
+It is ideal for web development purposes:
+- Emails are stored in memory not in your mailbox.
+- You can send from/to any address/domain with no configuration.
 
 Install and run
 ---------------
@@ -10,10 +16,10 @@ Install and run
 	npm install
 	node app.js
 
-Now an smtp server is running at port 4040 an a web interface 
-is running at port 4000.
-Just set your smtp client to send emails to localhost:4040 and
-go to the web interface to look at them
+1. An smtp server is running at port 4040.
+2. Send some emails. From/to can be any address.
+3. Open the web interface. http://localhost:4000
+4. Voilá
 
 License
 -------
