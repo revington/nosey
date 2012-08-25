@@ -1,0 +1,32 @@
+extends layout
+block content
+	.container-fluid
+		.span3
+		.span9
+			.row-fluid(data-bind="template: {name: template, foreach: emails}")
+
+
+	script(type="text/html", id="email-abstract")
+		.row-fluid
+			.span3
+				ul(data-bind="foreach: from")
+					li(data-bind="text: address")
+			.span8
+				a(data-bind="text: subject, click: showDetails")
+			.span1
+				span(data-bind="text: date")
+	script(type="text/html", id="email-deleted")
+	script(type="text/html", id="email-details")
+		.row-fluid
+			.span3
+				ul(data-bind="foreach: from")
+					li(data-bind="text: address")
+			.span8
+				a(data-bind="text: subject, click: showAbstract")
+			.span1
+				span(data-bind="text: date")
+		.row-fluid
+			h4 Text message
+			p(data-bind="text: text")
+			h4 HTML
+			div(data-bind="html: html")
