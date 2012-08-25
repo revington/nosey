@@ -26,6 +26,24 @@ var smtp = simplesmtp.createServer({
     debug: true
 }),
     db = [];
+
+function processEmail(email) {
+    var headers = [],
+        i;
+    for (i in email.headers) {
+        if (email.headers.hasOwnProperty(i)) {
+            headers.push({
+                name: i,
+                value: email.headers[i]
+            });
+        }
+    }
+    email.headers = headers;
+}
+app.all('*', function (req, res, next) {
+    res.charset = 'utf-8';
+    next();
+});
 app.get('/', function (req, res) {
     res.format({
         json: function () {
@@ -41,6 +59,7 @@ app.get('/', function (req, res) {
 smtp.listen(app.get('smtp port'), function (err) {
     smtp.on("startData", function (envelope) {
         envelope.buffer = "";
+        envelope.date = new Date();
     });
     smtp.on("data", function (envelope, chunk) {
         envelope.buffer += chunk;
@@ -48,6 +67,8 @@ smtp.listen(app.get('smtp port'), function (err) {
     smtp.on("dataReady", function (envelope, callback) {
         var mailParser = new MailParser();
         mailParser.on('end', function (email) {
+            processEmail(email);
+            email.date = envelope.date;
             db.push(email);
         });
         mailParser.write(envelope.buffer);

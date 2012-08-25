@@ -1,32 +1,53 @@
 extends layout
 block content
 	.container-fluid
-		.span3
-		.span9
-			.row-fluid(data-bind="template: {name: template, foreach: emails}")
+		.row-fluid(data-bind="template: {name: template, foreach: emails}")
 
 
 	script(type="text/html", id="email-abstract")
-		.row-fluid
-			.span3
-				ul(data-bind="foreach: from")
-					li(data-bind="text: address")
-			.span8
-				a(data-bind="text: subject, click: showDetails")
-			.span1
-				span(data-bind="text: date")
+		blockquote
+			button.close(data-bind="click: remove") &times;
+			p(data-bind="text: subject")
+			small
+				//ko foreach: from
+				strong(data-bind="text: address")
+				///ko
+				| &nbsp;to&nbsp;
+				//ko foreach:to 
+				strong(data-bind="text: address")
+				///ko
+				| &nbsp;received on&nbsp;
+				em(data-bind="text: date")
+			a.btn.btn-link(data-bind="click: showDetails") more…
 	script(type="text/html", id="email-deleted")
 	script(type="text/html", id="email-details")
-		.row-fluid
-			.span3
-				ul(data-bind="foreach: from")
-					li(data-bind="text: address")
-			.span8
-				a(data-bind="text: subject, click: showAbstract")
-			.span1
-				span(data-bind="text: date")
-		.row-fluid
-			h4 Text message
-			p(data-bind="text: text")
-			h4 HTML
-			div(data-bind="html: html")
+		blockquote
+			p(data-bind="text: subject")
+			small
+				//ko foreach: from
+				strong(data-bind="text: address")
+				///ko
+				| &nbsp;to&nbsp;
+				//ko foreach:to 
+				strong(data-bind="text: address")
+				///ko
+				| &nbsp;received on&nbsp;
+				em(data-bind="text: date")
+			a.btn.btn-link(data-bind="click: showAbstract") less
+			.row-fluid
+				h4 Text message
+				pre(data-bind="text: text")
+				h4 HTML
+				div.content-html(data-bind="html: html")
+			.row-fluid
+				table.table.table-striped
+					caption Headers
+					tr
+						th Name
+						th Value
+					//ko foreach: headers
+					tr
+						td(data-bind="text: name")
+						td(data-bind="text: value")
+					///ko
+			a.btn.btn-link(data-bind="click: showAbstract") less

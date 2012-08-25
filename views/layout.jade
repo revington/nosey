@@ -5,8 +5,8 @@ html
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap.css')
 	body
-		.alert
-			p Nosey smtp is listening on port 
+		.alert.alert-success
+			p Nosey smtp server is listening at port 
 				strong= smtpPort
 		block content
 		script(type='text/javascript', src='/javascripts/jquery-1.8.0.min.js')

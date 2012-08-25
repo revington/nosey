@@ -46,6 +46,15 @@ var nosey = (function () {
         iHaveTemplate(self);
     }
 
+    function Header(data) {
+        var self = this;
+        data = data || {};
+        initHelper(self, data, {
+            type: 'header',
+            value: undefined,
+            name: undefined
+        }, null);
+    }
     function Address(data) {
         var self = this;
         data = data || {};
@@ -58,6 +67,7 @@ var nosey = (function () {
 
     function Email(data) {
         data = data || {};
+
         var self = this;
         initHelper(self, data, {
             type: 'email',
@@ -66,6 +76,7 @@ var nosey = (function () {
             text: undefined,
             date: undefined,
             priority: undefined,
+            headers: [],
             from: [],
             to: []
         }, {
@@ -78,8 +89,15 @@ var nosey = (function () {
                 create: function (options) {
                     return new Address(options.data);
                 }
-            }
+            }, headers:{
+							create: function(options){
+								return new Header(options.data);
+							}
+						}
         });
+				self.remove = function(){
+					self.mode('deleted');
+				};
 				self.showDetails = function(){
 					self.mode('details');
 				};
@@ -95,6 +113,7 @@ var nosey = (function () {
             type: 'email-collection',
             emails: []
         }, null);
+				self.emails()[0].showDetails();
     }
     return {
         Email: Email,
