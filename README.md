@@ -11,7 +11,7 @@ It is ideal for web development purposes:
 Install and run
 ---------------
 
-	git clone git@github.com:revington/nosey.git
+	git clone https://github.com/revington/nosey.git
 	cd nosey
 	npm install
 	node app.js
