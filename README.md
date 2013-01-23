@@ -11,20 +11,23 @@ It is ideal for web development purposes:
 Install and run
 ---------------
 
-	git clone https://github.com/revington/nosey.git
-	cd nosey
-	npm install
-	node app.js
+	$ git clone https://github.com/revington/nosey.git
+	$ cd nosey
+	$ npm install
+
+Run nosey
+
+	$ node app.js
 
 1. An smtp server is running at port 4040.
 2. Send some emails. From/to can be any address.
 3. Open the web interface. http://localhost:4000
 4. Voilá
 
-A simple telnet session to test nosey
--------------------------------------
-You can telnet to nosey an send and email in 
-an old schoolway. Do the following:
+You can also telnet nosey
+-------------------------
+You can telnet nosey an send a email in 
+an old school way. Do the following:
 
 First execute nosey. You can do it in the background or in another
 terminal. 
@@ -35,18 +38,13 @@ terminal.
 Then telnet to nosey smtp server
 
 	$ telnet localhost 4040
-
-Boring output...
-
-	Trying 127.0.0.1...
+	>Trying 127.0.0.1...
 	>Connected to localhost.
 	>Escape character is '^]'.
 	>Connection from 127.0.0.1
 	>220 trifid ESMTP node.js simplesmtp
 
-trifid is my host. Will change on your computer
-
-First, do a HELO
+Do a HELO
 
 	HELO client
 	>250 trifid at your service, [127.0.0.1]
